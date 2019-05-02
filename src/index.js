@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 // import Hello from './Hello';
-import Card from './Card';
+// import Card from './Card';
+import CardList from './CardList';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
 import { robots } from './robots';
@@ -11,11 +12,7 @@ import { robots } from './robots';
 
 
 ReactDOM.render(
-    <div>
-        <Card id={ robots[0].id } name={ robots[0].name } email={ robots[0].email } />
-        <Card id={ robots[1].id } name={ robots[1].name } email={ robots[1].email }/>
-
-    </div>,
+    <CardList robots={ robots }/>,
     document.getElementById('root')
 );
 
