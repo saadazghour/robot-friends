@@ -4,15 +4,16 @@ import './index.css';
 // import App from './App';
 // import Hello from './Hello';
 // import Card from './Card';
-import CardList from './CardList';
+// import CardList from './CardList';
+import App from './App';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
-import { robots } from './robots';
+// import { robots } from './robots';
 
 
 
 ReactDOM.render(
-    <CardList robots={ robots }/>,
+    <App />,
     document.getElementById('root')
 );
 
