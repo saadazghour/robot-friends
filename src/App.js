@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CardList from './CardList';
 import SearchBox from './SearchBox';
-import { robots } from './robots';
+// import { robots } from './robots';
 
 
 
@@ -11,9 +11,18 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      robots: robots,
+      robots: [],
       searchField: ''
     }
+    // console.log("constructor");
+  }
+
+  componentDidMount() {
+    // console.log("componentDidMount");
+
+    fetch('https://jsonplaceholder.typicode.com/users')   // whe're fetch data here
+    .then((response) => response.json())    // whe're getting a response here
+    .then((users) => this.setState({ robots: users }))
   }
 
   onSearchChange = (event) => {
@@ -39,13 +48,19 @@ class App extends Component {
       return robot.name.toLowerCase().includes( searchField.toLowerCase())
     })
 
-    return (
-      <div className='tc'>
-        <h1 className='f1'>Robot Friends</h1>
-        <SearchBox searchChange={ this.onSearchChange }/>
-        <CardList robots={ robots_filtered }/>
-      </div>
-    )
+    // console.log("render");
+
+    if ( robots.length === 0 ) {
+      return <h1 className='tc'>Loading Data !!</h1>
+    } else {
+      return (
+        <div className='tc'>
+          <h1 className='f1'>Robot Friends</h1>
+          <SearchBox searchChange={ this.onSearchChange }/>
+          <CardList robots={ robots_filtered }/>
+        </div>
+      )
+    }
   }
 }
 
