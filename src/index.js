@@ -4,7 +4,7 @@ import './index.css';
 // import Hello from './Hello';
 // import Card from './Card';
 // import CardList from './CardList';
-import App from './App';
+import App from './Containers/App';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
 // import { robots } from './robots';

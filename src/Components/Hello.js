@@ -14,11 +14,11 @@ import './Hello.css'
 // }
 
 
-// let Hello = (props) => {                 // think React, just a Function
+// let Hello = ({ greeting }) => {                 // think React, just a Function
 //     return (
 //         <div className="f1 tc">
 //             <h1>Welcom to React</h1>
-//             <p>{ props.greeting }</p>
+//             <p>{ greeting }</p>
 //         </div>
 //     );
 // }
