@@ -4,6 +4,10 @@ import Card from './Card'
 
 
 const CardList = ({ robots }) => {
+    // if (true) {
+    //     throw new Error ('Robot Eroor');        // testing
+    // }
+
     const Card_Array = robots.map((item, index) => {
         // return console.log(index);
         return (

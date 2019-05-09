@@ -4,6 +4,7 @@ import './App.css';
 import CardList from '../Components/CardList';
 import SearchBox from '../Components/SearchBox';
 import Scroll from '../Components/Scroll';
+import ErrorBoundary from '../Components/ErrorBoundary';
 // import { robots } from './robots';
 
 
@@ -52,7 +53,7 @@ class App extends Component {
     // console.log("render");
 
     if ( robots.length === 0 ) {
-      return <h1 className='tc'>Loading !!</h1>
+      return <h2 className='tc'>Loading !!</h2>
     } else {
       return (
         <div className='tc'>
@@ -66,7 +67,9 @@ class App extends Component {
             */
           }
           <Scroll>
-            <CardList robots={ robots_filtered }/>
+            <ErrorBoundary>
+              <CardList robots={ robots_filtered }/>
+            </ErrorBoundary>
           </Scroll>
         </div>
       )
