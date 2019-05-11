@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // console.log( this.props.store.getState() );
     // console.log("componentDidMount");
 
     fetch('https://jsonplaceholder.typicode.com/users')   // whe're fetch data here

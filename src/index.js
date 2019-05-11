@@ -5,15 +5,22 @@ import './index.css';
 // import Card from './Card';
 // import CardList from './CardList';
 import App from './Containers/App';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { serch_Robots } from './reducers';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
 // import { robots } from './robots';
 
 
+// const store = createStore(rootReducer)
+
+const store = createStore( serch_Robots )
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('root')
+    <Provider store= { store } >
+        <App />
+    </Provider>, document.getElementById('root')
 );
 
 // ReactDOM.render(<Hello greeting = {"Hello Azghour-Saad"}/>, document.getElementById('root'));
