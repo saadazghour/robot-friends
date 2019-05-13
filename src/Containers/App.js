@@ -1,11 +1,31 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+// import { search_Robots } from '../reducers'
+import { setSearchField } from '../actions'
 import CardList from '../Components/CardList';
 import SearchBox from '../Components/SearchBox';
 import Scroll from '../Components/Scroll';
 import ErrorBoundary from '../Components/ErrorBoundary';
 // import { robots } from './robots';
+
+
+const mapStateToProps = (state) => {  // well get this (state) and searchField property on reducers file
+  return {
+    searchField: state.searchField
+  }
+  // return searchField: state.serch_Robots.searchField
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => {
+      dispatch(setSearchField(event.target.value))
+    }
+  }
+}
 
 
 
@@ -14,7 +34,7 @@ class App extends Component {
     super();
     this.state = {
       robots: [],
-      searchField: ''
+      // searchField: ''
     }
     // console.log("constructor");
   }
@@ -28,23 +48,31 @@ class App extends Component {
     .then((users) => this.setState({ robots: users }))
   }
 
-  onSearchChange = (event) => {
-    // console.log(event.target.value)
-    this.setState({ searchField: event.target.value })
-    // const { robots, searchField } = this.state
+  // onSearchChange = (event) => {
+  //   // console.log(event.target.value)
+  //   this.setState({ searchField: event.target.value })
+  //   // const { robots, searchField } = this.state
 
-    // const robots_filtered = robots.filter((robot) => {
-    //   // return console.log(robot);
-    //   return robot.name.toLowerCase().includes( searchField.toLowerCase())
-    // })
+  //   // const robots_filtered = robots.filter((robot) => {
+  //   //   // return console.log(robot);
+  //   //   return robot.name.toLowerCase().includes( searchField.toLowerCase())
+  //   // })
 
-    // console.log(robots_filtered);
-  }
+  //   // console.log(robots_filtered);
+  // }
+
+
+  // onSearchChange = (event) => {
+  //   // console.log(event.target.value)
+  //   this.setState({ searchField: event.target.value })
+  // }
 
 
   render() {
 
-    const { robots, searchField } = this.state
+    const { robots } = this.state
+
+    const { searchField, onSearchChange } = this.props
 
     const robots_filtered = robots.filter((robot) => {
       // return console.log(robot);
@@ -59,7 +87,7 @@ class App extends Component {
       return (
         <div className='tc'>
           <h1 className='f1'>Robot Friends</h1>
-          <SearchBox searchChange={ this.onSearchChange }/>
+          <SearchBox searchChange={ onSearchChange }/>
           {
             /*
               props
@@ -101,4 +129,5 @@ class App extends Component {
 //   );
 // }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default App;

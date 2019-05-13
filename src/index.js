@@ -6,8 +6,8 @@ import './index.css';
 // import CardList from './CardList';
 import App from './Containers/App';
 import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
-import { serch_Robots } from './reducers';
+import { Provider } from 'react-redux';
+import { search_Robots } from './reducers';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
 // import { robots } from './robots';
@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 
 // const store = createStore(rootReducer)
 
-const store = createStore( serch_Robots )
+const store = createStore( search_Robots )
 
 ReactDOM.render(
     <Provider store= { store } >
