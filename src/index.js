@@ -5,17 +5,19 @@ import './index.css';
 // import Card from './Card';
 // import CardList from './CardList';
 import App from './Containers/App';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { search_Robots } from './reducers';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
 // import { robots } from './robots';
+import logger from 'redux-logger'
+
 
 
 // const store = createStore(rootReducer)
 
-const store = createStore( search_Robots )
+const store = createStore( search_Robots, applyMiddleware(logger) )
 
 ReactDOM.render(
     <Provider store= { store } >
