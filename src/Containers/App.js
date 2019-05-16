@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 // import { search_Robots } from '../reducers'
-import { setSearchField } from '../actions'
+import { setSearchField, requestRobotsData } from '../actions'
 import CardList from '../Components/CardList';
 import SearchBox from '../Components/SearchBox';
 import Scroll from '../Components/Scroll';
@@ -13,7 +13,10 @@ import ErrorBoundary from '../Components/ErrorBoundary';
 
 const mapStateToProps = (state) => {  // well get this (state) and searchField property on reducers file
   return {
-    searchField: state.searchField
+    searchField: state.search_Robots.searchField,
+    robots: state.requestRobots.robots,
+    error: state.requestRobots.error,
+    isPending: state.requestRobots.isPending,
   }
   // return searchField: state.serch_Robots.searchField
 }
@@ -21,31 +24,35 @@ const mapStateToProps = (state) => {  // well get this (state) and searchField p
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSearchChange: (event) => {
-      dispatch(setSearchField(event.target.value))
-    }
+
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+
+    onRequestRobots: () => dispatch(requestRobotsData())
+
   }
 }
 
 
 
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      robots: [],
-      // searchField: ''
-    }
-    // console.log("constructor");
-  }
+  // constructor(){
+  //   super();
+  //   this.state = {         // don't need this constructor, because no more state with Redux
+  //     robots: [],
+  //     // searchField: ''
+  //   }
+  //   // console.log("constructor");
+  // }
 
   componentDidMount() {
     // console.log( this.props.store.getState() );
     // console.log("componentDidMount");
 
-    fetch('https://jsonplaceholder.typicode.com/users')   // whe're fetch data here
-    .then((response) => response.json())    // whe're getting a response here
-    .then((users) => this.setState({ robots: users }))
+    // fetch('https://jsonplaceholder.typicode.com/users')   // whe're fetch data here
+    // .then((response) => response.json())    // whe're getting a response here
+    // .then((users) => this.setState({ robots: users }))
+
+    this.props.onRequestRobots()
   }
 
   // onSearchChange = (event) => {
@@ -70,9 +77,9 @@ class App extends Component {
 
   render() {
 
-    const { robots } = this.state
+    // const { robots } = this.state
 
-    const { searchField, onSearchChange } = this.props
+    const { searchField, onSearchChange, robots } = this.props
 
     const robots_filtered = robots.filter((robot) => {
       // return console.log(robot);

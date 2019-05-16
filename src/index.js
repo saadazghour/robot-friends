@@ -5,19 +5,24 @@ import './index.css';
 // import Card from './Card';
 // import CardList from './CardList';
 import App from './Containers/App';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { search_Robots } from './reducers';
+import { search_Robots, requestRobots } from './reducers';
 import 'tachyons';
 import * as serviceWorker from './serviceWorker';
 // import { robots } from './robots';
 import logger from 'redux-logger'
+import thunk from 'redux-thunk'
 
 
+const rootReducer =  combineReducers({
+    search_Robots,
+    requestRobots
+})
 
 // const store = createStore(rootReducer)
 
-const store = createStore( search_Robots, applyMiddleware(logger) )
+const store = createStore( rootReducer, applyMiddleware(thunk, logger) )
 
 ReactDOM.render(
     <Provider store= { store } >
